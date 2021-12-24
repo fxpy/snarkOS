@@ -90,27 +90,7 @@ echo -e 'Enabling Aleo Node and Miner services\n' && sleep 1
 sudo systemctl enable aleod-miner
 #sudo systemctl restart aleod
 sudo systemctl restart aleod-miner
-echo -e "Installing Aleo Updater\n"
-cd $HOME
-wget -q -O $HOME/aleo_updater_WIP.sh https://api.nodes.guru/aleo_updater_WIP.sh && chmod +x $HOME/aleo_updater_WIP.sh
-echo "[Unit]
-Description=Aleo Updater Testnet2
-After=network-online.target
-[Service]
-User=$USER
-WorkingDirectory=$HOME/snarkOS
-ExecStart=/bin/bash $HOME/aleo_updater_WIP.sh
-Restart=always
-RestartSec=10
-LimitNOFILE=10000
-[Install]
-WantedBy=multi-user.target
-" > $HOME/aleo-updater.service
-sudo mv $HOME/aleo-updater.service /etc/systemd/system
-systemctl daemon-reload
-echo -e 'Enabling Aleo Updater services\n' && sleep 1
-systemctl enable aleo-updater
-systemctl restart aleo-updater
+
 echo -e 'To check your node/miner status - run this script in 15-20 minutes:\n' && sleep 1
 echo -e 'wget -O snarkos_monitor.sh https://api.nodes.guru/snarkos_monitor.sh && chmod +x snarkos_monitor.sh && ./snarkos_monitor.sh' && echo && sleep 1
 #if [[ `service aleod status | grep active` =~ "running" ]]; then
